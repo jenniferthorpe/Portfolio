@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import "./style/style.css";
 import WelcomeHeader from './components/WelcomeHeader';
-import ProjectData from "./components/ProjectData";
+import NavImg from './components/NavImg';
 
 
-function App() {
-    return (
-        <div>
+class App extends Component {
 
-            <WelcomeHeader />
-            <ProjectData className="project-content" />
-        </div>
-    )
+    render() {
+
+        return (
+            <div>
+                <WelcomeHeader id="start" />
+                <NavImg id="projects" />
+
+            </div >
+        );
+    }
 }
 
 export default App;
+
