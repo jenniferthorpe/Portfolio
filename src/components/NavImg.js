@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProjectData from "../data/ProjectData";
-import Card from "./card"
 import Popup from "./Popup.js"
+import Card from "./Card.js"
 import '../style/style.css'
 
 
@@ -10,13 +10,21 @@ class NavImg extends Component {
         super(props);
         this.state = {
             showPopup: false,
-            projects: ProjectData
+            projects: ProjectData,
+            activeCard: ""
+
         }
+        this.handleCardClick = this.handleCardClick.bind(this);
     }
 
-    togglePopup() {
+    handleCardClick(cardID) {
+        this.setState({ activeCard: cardID })
+    }
+
+    togglePopup(e) {
         if (this.state.showPopup === false) {
             this.setState({ showPopup: true })
+
         } else {
             this.setState({ showPopup: false })
         }
@@ -25,18 +33,24 @@ class NavImg extends Component {
 
     render() {
 
-        let navImages = this.state.projects.map(data =>
-            <Card img={data.img} key={data.id} data_id={data.id} className="doubleBorder"
-            />
+        let navImages = ProjectData.map(data =>
+            <div style={{ width: "35%" }} className="flexCenter">
+                <Card onClick={() => this.handleCardClick(data.id)} img={data.img} key={data.id} data_id={data.id}
+                />
+            </div>
+
         )
 
         return (
-            <div onClick={this.togglePopup.bind(this)}>
+            <div onClick={this.togglePopup.bind(this)}
+
+                className="cardContainer flexCenter">
                 {navImages}
                 {this.state.showPopup ?
                     <Popup
-                        text='Click "Close Button" to hide popup'
+                        text='Info om projektet'
                         closePopup={this.togglePopup.bind(this)}
+                        activeCard={this.state.activeCard}
                     />
                     : null
                 }

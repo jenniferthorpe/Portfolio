@@ -1,43 +1,44 @@
 import React, { Component } from 'react';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import "../style/style.css"
-import Projects from "./Projects"
+
 
 export default class WelcomeHeader extends Component {
+    constructor() {
+        super();
+        this.state = {
+
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.incOpacity);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.incOpacity);
+    }
+
+    incOpacity() {
+        console.log("hej");
+        let background = document.querySelector(".headerBg");
+        let car = document.querySelector(".car");
+        let start = window.innerHeight - 100;
+
+        let opacity = 1 - window.scrollY / start;
+        background.style.opacity = opacity;
+        car.style.opacity = opacity;
+        console.log(opacity);
+    }
 
     render() {
+
+
         return (
-            <div>
-                {/* <Router>
-
-                    <nav>
-                        <Link to="/" replace>
-                            <div>start</div>
-
-                        </Link>
-
-                        <Link to="/projects" replace>
-                            <div>"projects"</div>
-
-                        </Link>
-                        <Link to="/timeline" replace>
-                            <div>timeline</div>
-
-                        </Link>
-                        <Link to="/contact" replace>
-                            <div>contact</div>
-                        </Link>
-                    </nav>
-                    <Route path="/" component={WelcomeHeader} exact />
-                    <Route path="/projects" component={Projects} exact />
-                    <Route path="/" component={WelcomeHeader} exact />
-                    <Route path="/" component={WelcomeHeader} exact />
-                </Router> */}
-
-
-                <header className="headerBg"></header>
-
+            <div onScroll={this.incOpacity}>
+                <header className="headerBg" ></header>
+                <div className="car"></div>
             </div>
+
         )
     }
 
