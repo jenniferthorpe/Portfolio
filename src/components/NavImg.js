@@ -34,7 +34,7 @@ class NavImg extends Component {
     render() {
 
         let navImages = ProjectData.map(data =>
-            <div style={{ width: "35%" }} className="flexCenter">
+            <div style={{ width: "35%" }} className="flexCenter" key={data.id}>
                 <Card onClick={() => this.handleCardClick(data.id)} img={data.img} key={data.id} data_id={data.id}
                 />
             </div>
